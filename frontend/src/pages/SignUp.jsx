@@ -4,6 +4,7 @@ import EyesOpen from "../components/icons/EyesOpen"
 import LockIcons from "../components/icons/LockIcons"
 import { Link } from 'react-router-dom'
 import imageToBase64 from "../helpers/imageToBase64"
+import { toast } from "react-toastify"
 
 const SignUp = () => {
 
@@ -48,8 +49,35 @@ const SignUp = () => {
         console.log("imageToBase64", Image64);
     }
 
-    const handleSubmit = (e) => {
-        e.prebentDefault()
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        const response = await fetch("http://localhost:8080/api/sign-up", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+
+        const dataResponse = await response.json();
+
+        console.log("response in sign up page: ", dataResponse);
+
+        if(dataResponse.error) {
+            toast.error(dataResponse.message)
+        }
+
+        if(dataResponse.success) {
+            toast.success(dataResponse.message)
+            setData({
+                name: "",
+                email: "",
+                password: "",
+                confirmPassword: "",
+                profilePic: ""
+            })
+        }
     }
 
     console.log("data: ", data);
@@ -77,7 +105,7 @@ const SignUp = () => {
                     </div>
                 </div>
 
-                <form className="form">
+                <form className="form" onSubmit={handleSubmit}>
 
                     <div className="form-element">
                         <label htmlFor="name">Name :</label>
@@ -119,7 +147,7 @@ const SignUp = () => {
 
                     <button className="btn-sign">
                         {
-                            loading ? 'Loading...' : "Sign In"
+                            loading ? 'Loading...' : "Sign Up"
                         }
                     </button>
                 </form>
