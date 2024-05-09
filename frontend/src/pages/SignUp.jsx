@@ -32,7 +32,11 @@ const SignUp = () => {
 
     const handleUploadFile = async (e) => {
         const file = e.target.files[0];
-        const Image64 = await imageToBase64(file)
+        let Image64 = "";
+        if(file?.name) {
+            console.log(file);
+            Image64 = await imageToBase64(file)
+        }
 
         setData((prev) => {
             return{
@@ -54,23 +58,23 @@ const SignUp = () => {
         <div className="h-screen-center">
             <div className="card-form">
                 <div className="card-header">
-                    {
-                        data.profilePic ? (
-                            <img src={data.profilePic} className="profile-pic"/>
-                        ) : (
-                            <div className="sign-form-lock-container">
+                    <div className="sign-form-lock-container">
+                        {
+                            data.profilePic ? (
+                                <img src={data.profilePic} className="profile-pic"/>
+                            ) : (
                                 <div className="lock-icons">
                                     <LockIcons />
-                                    <form>
-                                        <label htmlFor="upload-pic-input">
-                                            <div className="upload-pic-text">Upload Pic</div>
-                                            <input type="file" id="upload-pic-input" onChange={handleUploadFile}/>
-                                        </label>
-                                    </form>
                                 </div>
-                            </div>
-                        )
-                    }
+                            )
+                        }
+                        <form>
+                            <label htmlFor="upload-pic-input">
+                                <div className="upload-pic-text">Upload Pic</div>
+                                <input type="file" id="upload-pic-input" onChange={handleUploadFile}/>
+                            </label>
+                        </form> 
+                    </div>
                 </div>
 
                 <form className="form">

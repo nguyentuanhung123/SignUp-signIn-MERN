@@ -90,8 +90,8 @@
 }
 
 .profile-pic {
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
   border-radius: 100px;
   overflow: hidden;
   box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.05);
@@ -109,7 +109,6 @@
   background-color: rgba(0, 0, 0, 0.5);
   bottom: 0;
   width: 100%;
-  margin-left: -18px;
   text-align: center;
   color: #fff;
   cursor: pointer;
@@ -121,7 +120,7 @@
   overflow: hidden;
   margin: 0 auto;
   border-radius: 100px;
-  background-color: red;
+  position: relative;
 }
 
 #upload-pic-input {
