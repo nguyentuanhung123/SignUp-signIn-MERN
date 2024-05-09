@@ -23,3 +23,11 @@ app.listen(PORT, () => {
 ```
 
 -> Sauwr lại file index.js và chạy: npm run dev
+
+### Khi ta đăng ký với chỉ code bên dưới thì vẫn thành công dù không có cors
+
+```jsx
+const app = express();
+app.use(cors())
+app.use(express.json())
+```

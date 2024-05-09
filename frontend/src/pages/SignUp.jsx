@@ -2,7 +2,7 @@ import { useState } from "react"
 import EyeClose from "../components/icons/EyeClose"
 import EyesOpen from "../components/icons/EyesOpen"
 import LockIcons from "../components/icons/LockIcons"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import imageToBase64 from "../helpers/imageToBase64"
 import { toast } from "react-toastify"
 
@@ -19,6 +19,8 @@ const SignUp = () => {
         confirmPassword: "",
         profilePic: ""
     })
+
+    const navigate = useNavigate()
 
     const handleOnChange = (e) => {
         const {name, value} = e.target;
@@ -52,6 +54,12 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        if(data.password !== data.confirmPassword) {
+            toast.error("Password and cofirm password must be same !")
+            return
+        }
+
+        setLoading(true)
         const response = await fetch("http://localhost:8080/api/sign-up", {
             method: "POST",
             headers: {
@@ -61,7 +69,7 @@ const SignUp = () => {
         })
 
         const dataResponse = await response.json();
-
+        setLoading(false)
         console.log("response in sign up page: ", dataResponse);
 
         if(dataResponse.error) {
@@ -77,6 +85,7 @@ const SignUp = () => {
                 confirmPassword: "",
                 profilePic: ""
             })
+            navigate('/sign-in')
         }
     }
 

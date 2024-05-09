@@ -49,7 +49,7 @@ const userSignUp = async (req, res) => {
                     })
                 }
 
-                console.log("hash", hash);
+                // console.log("hash", hash);
 
                 const payload = {
                     ...req.body,
