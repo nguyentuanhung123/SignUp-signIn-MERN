@@ -126,3 +126,18 @@
 #upload-pic-input {
   display: none;
 }
+
+/* user-profile */
+.user-profile {
+  width: 100%;
+  max-width: 350px;
+  background-color: #fff;
+}
+
+.user-profile-icons {
+  width: 50px;
+  height: 50px;
+  padding: 20px;
+  border: 2px solid rgb(49, 49, 122);
+  border-radius: 50px;
+}
